@@ -2,50 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/login_page_controller.dart';
-import 'package:week_one_project/pages/signup.dart';
 
 class LoginPage extends StatelessWidget {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final loginController = Get.put(LoginController());
   LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              AppButton(
-                label: "-",
-                onPressed: () {
-                  loginController.decrement();
-                },
-              ),
-              Obx(() => Center(
-                    child: Text(loginController.counter.toString()),
-                  )),
-              AppButton(
-                label: "+",
-                onPressed: () {
-                  loginController.increment();
-                  print(loginController.counter);
-                },
-              ),
-            ],
+      body: Padding(
+        padding: const EdgeInsets.only(right: 20, left: 20),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Center(
+              child: Text(
+            "Login",
+            style: TextStyle(fontSize: 24),
+          )),
+          const SizedBox(height: 20),
+          TextFormField(
+            controller: emailController,
+            decoration: const InputDecoration(
+              hintText: "Enter your email",
+              labelText: "Email",
+              border: OutlineInputBorder(),
+            ),
           ),
-          const SizedBox(
-            height: 50,
+          const SizedBox(height: 20),
+          TextFormField(
+            controller: passwordController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              hintText: "Enter your Password",
+              labelText: "Password",
+              border: OutlineInputBorder(),
+            ),
           ),
+          const SizedBox(height: 20),
           AppButton(
-            width: 300,
-            label: "Go to Second Page",
+            width: Get.width,
             onPressed: () {
-              Get.to(SignUp());
+              var data = {
+                'email': emailController.text,
+                'password': passwordController.text
+              };
+              print(data);
             },
-          ),
-        ],
+          )
+        ]),
       ),
     );
   }
