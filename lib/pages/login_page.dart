@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/login_page_controller.dart';
+import 'package:week_one_project/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -41,13 +42,14 @@ class LoginPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           AppButton(
+            label: "Login",
             width: Get.width,
             onPressed: () {
               var data = {
                 'email': emailController.text,
                 'password': passwordController.text
               };
-              print(data);
+              Get.off(HomePage());
             },
           )
         ]),
