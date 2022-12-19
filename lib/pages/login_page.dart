@@ -41,17 +41,19 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          AppButton(
-            label: "Login",
-            width: Get.width,
-            onPressed: () {
-              var data = {
-                'email': emailController.text,
-                'password': passwordController.text
-              };
-              Get.off(HomePage());
-            },
-          )
+          Obx(() => Container(
+                child: loginController.loading.value
+                    ? CircularProgressIndicator()
+                    : AppButton(
+                        label: "Login",
+                        width: Get.width,
+                        onPressed: () {
+                          loginController.login(
+                              email: emailController.text,
+                              password: passwordController.text);
+                        },
+                      ),
+              ))
         ]),
       ),
     );

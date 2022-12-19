@@ -12,17 +12,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        children: [
-          AppButton(
-            label: "-",
-            onPressed: () {
-              loginController.decrement();
-            },
-          ),
-          Obx(() => Center(
-                child: Text(loginController.counter.toString()),
-              )),
-        ],
+        children: [],
       ),
     );
   }

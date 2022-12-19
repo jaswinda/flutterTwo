@@ -12,7 +12,7 @@ class AppButton extends StatelessWidget {
       this.onPressed,
       this.height = 50,
       this.width = 100,
-      this.label = "Click Me"});
+      this.label = "Login"});
 
   @override
   Widget build(BuildContext context) {
