@@ -3,13 +3,12 @@ import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/authentication_controler.dart';
 import 'package:week_one_project/pages/home_page.dart';
-import 'package:week_one_project/pages/register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final loginController = Get.find<AuthenticationController>();
-  LoginPage({Key? key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class LoginPage extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Center(
               child: Text(
-            "Login",
+            "Register",
             style: TextStyle(fontSize: 24),
           )),
           const SizedBox(height: 20),
@@ -46,10 +45,10 @@ class LoginPage extends StatelessWidget {
                 child: loginController.loading.value
                     ? CircularProgressIndicator()
                     : AppButton(
-                        label: "Login",
+                        label: "Register",
                         width: Get.width,
                         onPressed: () {
-                          loginController.login(
+                          loginController.register(
                               email: emailController.text,
                               password: passwordController.text);
                         },
@@ -58,15 +57,15 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text("DON'T HAVE ACCOUNT?"),
+          Text("ALREADY HAVE ACCOUNT?"),
           SizedBox(
             height: 10,
           ),
           InkWell(
               onTap: () {
-                Get.to(RegisterPage());
+                Get.back();
               },
-              child: Text("Sign Up")),
+              child: Text("LOGIN")),
         ]),
       ),
     );
