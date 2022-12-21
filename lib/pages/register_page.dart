@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/authentication_controler.dart';
-import 'package:week_one_project/pages/home_page.dart';
 
 class RegisterPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -43,7 +42,7 @@ class RegisterPage extends StatelessWidget {
           const SizedBox(height: 20),
           Obx(() => Container(
                 child: loginController.loading.value
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : AppButton(
                         label: "Register",
                         width: Get.width,
@@ -54,18 +53,18 @@ class RegisterPage extends StatelessWidget {
                         },
                       ),
               )),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text("ALREADY HAVE ACCOUNT?"),
-          SizedBox(
+          const Text("ALREADY HAVE ACCOUNT?"),
+          const SizedBox(
             height: 10,
           ),
           InkWell(
               onTap: () {
                 Get.back();
               },
-              child: Text("LOGIN")),
+              child: const Text("LOGIN")),
         ]),
       ),
     );

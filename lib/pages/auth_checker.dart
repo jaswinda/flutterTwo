@@ -1,32 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:week_one_project/controllers/authentication_controler.dart';
+import 'package:week_one_project/pages/admin/admin_home.dart';
+import 'package:week_one_project/pages/user/home_page.dart';
+import 'package:week_one_project/pages/login_page.dart';
+import 'package:week_one_project/services/auth_service.dart';
 
 class AuthChecker extends StatefulWidget {
-  AuthChecker({super.key});
+  const AuthChecker({super.key});
 
   @override
   State<AuthChecker> createState() => _AuthCheckerState();
 }
 
 class _AuthCheckerState extends State<AuthChecker> {
-  final AuthenticationController authenticationController =
-      Get.put(AuthenticationController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkLogin();
+    checkIfLoggedIn()
+;
   }
+  checkIfLoggedIn() async {
+    AuthService authService = AuthService();
+    var token =await authService.getToken();
 
-  checkLogin() async {
-    await authenticationController.checkIfLogin();
+    if(token!=null){
+      var isAdmin =await authService.getIsAdmin();
+      print("is admin: $isAdmin");
+      if(isAdmin){
+        Get.offAll(()=> AdminHome());
+
+      }else{
+        Get.offAll(()=>HomePage());
+      }
+    }else{
+         Get.offAll(LoginPage());
+    }
+
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+    return const Scaffold(
+    body: Center(child: CircularProgressIndicator(
+      color: Colors.black,
+    )),
     );
   }
 }

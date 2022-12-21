@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:week_one_project/main.dart';
-import 'package:week_one_project/pages/home_page.dart';
-import 'package:week_one_project/pages/login_page.dart';
+import 'package:week_one_project/pages/user/home_page.dart';
+import 'package:week_one_project/services/auth_service.dart';
 import 'package:week_one_project/utils/api.dart';
 
 class AuthenticationController extends GetxController {
+  final AuthService authService = AuthService();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -22,12 +21,13 @@ class AuthenticationController extends GetxController {
     var response = await http.post(Uri.parse(LOGINAPI), body: data);
     loading.value = false;
     var decodedResponse = await jsonDecode(response.body);
-    print(decodedResponse);
+   
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
       var token = decodedResponse["token"];
-      sharedPreferences.setString("token", token);
-      Get.to(const HomePage());
+      var isAdmin =  decodedResponse["isAdmin"];
+      await authService.savetoken(token, isAdmin: isAdmin);
+      Get.to(()=> HomePage());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }
@@ -42,18 +42,11 @@ class AuthenticationController extends GetxController {
     var decodedResponse = await jsonDecode(response.body);
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
-      Get.to(const HomePage());
+      Get.to( ()=>HomePage());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }
   }
 
-  checkIfLogin() async {
-    var token = await sharedPreferences.getString("token");
-    if (token != null) {
-      Get.to(HomePage());
-    } else {
-      Get.to(LoginPage());
-    }
-  }
+  
 }

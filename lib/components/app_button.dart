@@ -25,10 +25,13 @@ class AppButton extends StatelessWidget {
             color: buttonColor,
             borderRadius: const BorderRadius.all(Radius.circular(100))),
         child: Center(
-            child: Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 24),
-        )),
+            child: Hero(
+              tag: 'auth',
+              child: Text(
+                      label,
+                      style: const TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+            )),
       ),
     );
   }

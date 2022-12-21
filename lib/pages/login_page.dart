@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/authentication_controler.dart';
-import 'package:week_one_project/pages/home_page.dart';
 import 'package:week_one_project/pages/register_page.dart';
 
 class LoginPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final loginController = Get.find<AuthenticationController>();
+  final loginController = Get.put(AuthenticationController());
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -44,7 +43,7 @@ class LoginPage extends StatelessWidget {
           const SizedBox(height: 20),
           Obx(() => Container(
                 child: loginController.loading.value
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : AppButton(
                         label: "Login",
                         width: Get.width,
@@ -55,18 +54,18 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
               )),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text("DON'T HAVE ACCOUNT?"),
-          SizedBox(
+          const Text("DON'T HAVE ACCOUNT?"),
+          const SizedBox(
             height: 10,
           ),
           InkWell(
               onTap: () {
                 Get.to(RegisterPage());
               },
-              child: Text("Sign Up")),
+              child: const Text("Sign Up")),
         ]),
       ),
     );
