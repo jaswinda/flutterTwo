@@ -8,11 +8,6 @@ import 'package:week_one_project/utils/api.dart';
 
 class AuthenticationController extends GetxController {
   final AuthService authService = AuthService();
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 
   var loading = false.obs;
   Future<void> login({required String email, required String password}) async {
@@ -26,6 +21,7 @@ class AuthenticationController extends GetxController {
       Get.snackbar("Success", decodedResponse["message"]);
       var token = decodedResponse["token"];
       var isAdmin =  decodedResponse["isAdmin"];
+      print(decodedResponse);
       await authService.savetoken(token, isAdmin: isAdmin);
       Get.to(()=> HomePage());
     } else {

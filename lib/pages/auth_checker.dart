@@ -26,7 +26,7 @@ class _AuthCheckerState extends State<AuthChecker> {
 
     if(token!=null){
       var isAdmin =await authService.getIsAdmin();
-      print("is admin: $isAdmin");
+      
       if(isAdmin){
         Get.offAll(()=> AdminHome());
 
