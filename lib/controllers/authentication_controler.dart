@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:week_one_project/pages/auth_checker.dart';
 import 'package:week_one_project/pages/user/home_page.dart';
 import 'package:week_one_project/services/auth_service.dart';
 import 'package:week_one_project/utils/api.dart';
@@ -23,7 +24,7 @@ class AuthenticationController extends GetxController {
       var isAdmin =  decodedResponse["isAdmin"];
       print(decodedResponse);
       await authService.savetoken(token, isAdmin: isAdmin);
-      Get.to(()=> HomePage());
+      Get.to(()=> const AuthChecker());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }

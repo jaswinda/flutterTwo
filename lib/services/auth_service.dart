@@ -15,8 +15,8 @@ class AuthService {
 
   getIsAdmin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var isAdmin = prefs.getBool('isAdmin');
-    return isAdmin ?? false;
+    var isAdmin = prefs.getBool('isAdmin')??false;
+    return isAdmin;
   }
 
   removeToken() {

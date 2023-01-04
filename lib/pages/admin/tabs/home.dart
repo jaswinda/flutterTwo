@@ -4,6 +4,7 @@ import 'package:week_one_project/components/card_button.dart';
 import 'package:week_one_project/pages/admin/add_merchant.dart';
 
 class Home extends StatelessWidget {
+  
   const Home({super.key});
 
   @override

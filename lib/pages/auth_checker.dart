@@ -28,7 +28,7 @@ class _AuthCheckerState extends State<AuthChecker> {
       var isAdmin =await authService.getIsAdmin();
       
       if(isAdmin){
-        Get.offAll(()=> AdminHome());
+        Get.offAll(()=> const AdminHome());
 
       }else{
         Get.offAll(()=>HomePage());

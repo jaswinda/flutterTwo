@@ -23,7 +23,7 @@ class _AdminHomeState extends State<AdminHome> {
 
   final _map = <AppTab, TabBuilder>{
     AppTab.report: () {
-      return const Report();
+      return  Report();
     },
     AppTab.home: () {
       return const Home();
