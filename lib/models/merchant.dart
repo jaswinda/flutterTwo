@@ -23,7 +23,7 @@ class Merchant {
 
     factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
         id: json["id"],
-        username: json["username"],
+        username: json["email"],
         password: json["password"],
         role: json["role"],
     );

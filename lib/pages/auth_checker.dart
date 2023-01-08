@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/pages/admin/admin_home.dart';
-import 'package:week_one_project/pages/user/home_page.dart';
+import 'package:week_one_project/pages/merchant/merchant_home.dart';
 import 'package:week_one_project/pages/login_page.dart';
+import 'package:week_one_project/pages/user/home_page.dart';
 import 'package:week_one_project/services/auth_service.dart';
 
 class AuthChecker extends StatefulWidget {
@@ -17,33 +18,38 @@ class _AuthCheckerState extends State<AuthChecker> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkIfLoggedIn()
-;
+    checkIfLoggedIn();
   }
+
   checkIfLoggedIn() async {
     AuthService authService = AuthService();
-    var token =await authService.getToken();
+    var token = await authService.getToken();
 
-    if(token!=null){
-      var isAdmin =await authService.getIsAdmin();
-      
-      if(isAdmin){
-        Get.offAll(()=> const AdminHome());
+    if (token != null) {
+      var role = await authService.getRole();
 
-      }else{
-        Get.offAll(()=>HomePage());
+      switch (role) {
+        case 'merchant':
+          Get.offAll(() => const MerchantHome());
+          break;
+        case 'admin':
+          Get.offAll(() => const AdminHome());
+          break;
+        default:
+          Get.offAll(() =>  HomePage());
       }
-    }else{
-         Get.offAll(LoginPage());
+    } else {
+      Get.offAll(LoginPage());
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-    body: Center(child: CircularProgressIndicator(
-      color: Colors.black,
-    )),
+      body: Center(
+          child: CircularProgressIndicator(
+        color: Colors.black,
+      )),
     );
   }
 }

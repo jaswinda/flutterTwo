@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:week_one_project/pages/auth_checker.dart';
-import 'package:week_one_project/pages/user/home_page.dart';
 import 'package:week_one_project/services/auth_service.dart';
 import 'package:week_one_project/utils/api.dart';
 
@@ -21,9 +20,10 @@ class AuthenticationController extends GetxController {
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
       var token = decodedResponse["token"];
-      var isAdmin =  decodedResponse["isAdmin"];
+      var role =  decodedResponse["role"];
       print(decodedResponse);
-      await authService.savetoken(token, isAdmin: isAdmin);
+      await authService.savetoken(token, role: role);
+
       Get.to(()=> const AuthChecker());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
@@ -39,7 +39,8 @@ class AuthenticationController extends GetxController {
     var decodedResponse = await jsonDecode(response.body);
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
-      Get.to( ()=>HomePage());
+      print(decodedResponse);
+      Get.to( ()=>const AuthChecker());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }

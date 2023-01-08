@@ -1,10 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  savetoken(String token, {isAdmin = false}) async {
+  savetoken(String token, {role = false}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
-    await prefs.setBool('isAdmin', isAdmin);
+    await prefs.setString('role', role);
   }
 
   getToken() async {
@@ -13,9 +13,9 @@ class AuthService {
     return token;
   }
 
-  getIsAdmin() async {
+  getRole() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var isAdmin = prefs.getBool('isAdmin')??false;
+    var isAdmin = prefs.getString('role')??false;
     return isAdmin;
   }
 
