@@ -7,10 +7,8 @@ import 'package:week_one_project/models/merchant.dart';
 import 'package:week_one_project/utils/api.dart';
 
 class MerchantController extends GetxController {
-
-
   var loading = false.obs;
-  List<Merchant> merchantsList= RxList.empty();
+  List<Merchant> merchantsList = RxList.empty();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -18,44 +16,42 @@ class MerchantController extends GetxController {
     get();
   }
 
-  
- 
   Future<void> register(
       {required String email, required String password}) async {
-    var data = {'username': email, 'password': password};
+    var data = {'email': email, 'password': password};
     loading.value = true;
     var response = await http.post(Uri.parse(MERCAHNTADDAPI), body: data);
     loading.value = false;
     var decodedResponse = await jsonDecode(response.body);
     if (decodedResponse["success"]) {
       Get.back();
-      Get.snackbar("Success", decodedResponse["message"], backgroundColor: Colors.white);
-      
-
+      Get.snackbar("Success", decodedResponse["message"],
+          backgroundColor: Colors.white);
     } else {
-      Get.snackbar("Failed", decodedResponse["message"],backgroundColor: Colors.white);
+      Get.snackbar("Failed", decodedResponse["message"],
+          backgroundColor: Colors.white);
     }
   }
+
   Future<void> get() async {
     loading.value = true;
-    var response = await http.get(Uri.parse(MERCAHNTGETAPI),);
+    var response = await http.get(
+      Uri.parse(MERCAHNTGETAPI),
+    );
     loading.value = false;
     var decodedResponse = await jsonDecode(response.body);
     if (decodedResponse["success"]) {
-      
       var merchants = await decodedResponse["data"];
       for (var merchant in merchants) {
         merchantsList.add(Merchant.fromJson(merchant));
       }
       print(merchantsList);
-      
-      
-      Get.snackbar("Success", decodedResponse["message"], backgroundColor: Colors.white);
 
+      Get.snackbar("Success", decodedResponse["message"],
+          backgroundColor: Colors.white);
     } else {
-      Get.snackbar("Failed", decodedResponse["message"],backgroundColor: Colors.white);
+      Get.snackbar("Failed", decodedResponse["message"],
+          backgroundColor: Colors.white);
     }
   }
-
-  
 }

@@ -6,7 +6,6 @@ import 'package:week_one_project/pages/merchant/tabs/bookings.dart';
 import 'package:week_one_project/pages/merchant/tabs/home.dart';
 import 'package:week_one_project/pages/admin/tabs/profile.dart';
 
-
 class MerchantHome extends StatefulWidget {
   const MerchantHome({
     Key? key,
@@ -15,6 +14,7 @@ class MerchantHome extends StatefulWidget {
   @override
   _MerchantHomeState createState() => _MerchantHomeState();
 }
+
 class _MerchantHomeState extends State<MerchantHome> {
   final _tabController = StreamController<AppTab>.broadcast();
   final _initTab = AppTab.home;
@@ -23,14 +23,15 @@ class _MerchantHomeState extends State<MerchantHome> {
 
   final _map = <AppTab, TabBuilder>{
     AppTab.report: () {
-      return  const Booking();
+      return Booking();
     },
     AppTab.home: () {
       return const Home();
     },
     AppTab.profile: () {
-      return
-      const Profile(isMerchant: true,);
+      return const Profile(
+        isMerchant: true,
+      );
     }
   };
 
