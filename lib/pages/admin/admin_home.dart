@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tabnavigator/tabnavigator.dart';
+import 'package:week_one_project/pages/admin/tabs/products.dart';
 import 'package:week_one_project/pages/admin/tabs/home.dart';
 import 'package:week_one_project/pages/admin/tabs/profile.dart';
 import 'package:week_one_project/pages/admin/tabs/report.dart';
-
 
 class AdminHome extends StatefulWidget {
   const AdminHome({
@@ -15,6 +15,7 @@ class AdminHome extends StatefulWidget {
   @override
   _AdminHomeState createState() => _AdminHomeState();
 }
+
 class _AdminHomeState extends State<AdminHome> {
   final _tabController = StreamController<AppTab>.broadcast();
   final _initTab = AppTab.home;
@@ -22,15 +23,17 @@ class _AdminHomeState extends State<AdminHome> {
   Stream<AppTab> get tabStream => _tabController.stream;
 
   final _map = <AppTab, TabBuilder>{
+    AppTab.products: () {
+      return Products();
+    },
     AppTab.report: () {
-      return  Report();
+      return Report();
     },
     AppTab.home: () {
       return const Home();
     },
     AppTab.profile: () {
-      return
-      const Profile();
+      return const Profile();
     }
   };
 
@@ -51,17 +54,21 @@ class _AdminHomeState extends State<AdminHome> {
           selectedItemColor: Colors.black,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.feedback),
-              label: 'Report',
-            ),
+                icon: Icon(Icons.production_quantity_limits),
+                label: 'Products',
+                backgroundColor: Colors.blue),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
+                icon: Icon(Icons.feedback),
+                label: 'Merchants',
+                backgroundColor: Colors.blue),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
+                icon: Icon(Icons.home),
+                label: 'Home',
+                backgroundColor: Colors.blue),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profile',
+                backgroundColor: Colors.blue),
           ],
           currentIndex: snapshot.hasData ? snapshot.data!.value : 0,
           onTap: (value) => _tabController.sink.add(AppTab.byValue(value)),
@@ -88,17 +95,20 @@ class _AdminHomeState extends State<AdminHome> {
 class AppTab extends TabType {
   const AppTab._(int value) : super(value);
 
-  static const report = AppTab._(0);
-  static const home = AppTab._(1);
-  static const profile = AppTab._(2);
+  static const products = AppTab._(0);
+  static const report = AppTab._(1);
+  static const home = AppTab._(2);
+  static const profile = AppTab._(3);
 
   static AppTab byValue(int value) {
     switch (value) {
       case 0:
-        return report;
+        return products;
       case 1:
-        return home;
+        return report;
       case 2:
+        return home;
+      case 3:
         return profile;
       default:
         throw Exception('no tab for such value');

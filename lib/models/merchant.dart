@@ -4,34 +4,36 @@
 
 import 'dart:convert';
 
-List<Merchant> merchantFromJson(String str) => List<Merchant>.from(json.decode(str).map((x) => Merchant.fromJson(x)));
+List<Merchant> merchantFromJson(String str) =>
+    List<Merchant>.from(json.decode(str).map((x) => Merchant.fromJson(x)));
 
-String merchantToJson(List<Merchant> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String merchantToJson(List<Merchant> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Merchant {
-    Merchant({
-        required this.id,
-        required this.username,
-        required this.password,
-        required this.role,
-    });
+  Merchant({
+    required this.id,
+    required this.username,
+    required this.password,
+    required this.role,
+  });
 
-    String id;
-    String username;
-    String password; 
-    String role;
+  String id;
+  String username;
+  String password;
+  String role;
 
-    factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
+  factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
         id: json["id"],
-        username: json["email"],
+        username: json["username"],
         password: json["password"],
         role: json["role"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
         "password": password,
         "role": role,
-    };
+      };
 }

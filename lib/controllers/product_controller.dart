@@ -44,6 +44,19 @@ class ProductController extends GetxController {
     }
   }
 
+  toggle({data}) async {
+    var token = await authService.getToken();
+    data["token"] = token;
+    var response = await http.post(Uri.parse(TOGGLE_PRODUCT), body: data);
+    isLoading.value = false;
+    var decodedResponse = await jsonDecode(response.body);
+    if (decodedResponse["success"]) {
+      Get.snackbar("Success", decodedResponse["message"]);
+    } else {
+      Get.snackbar("Failed", decodedResponse["message"]);
+    }
+  }
+
   Future<void> get() async {
     isLoading.value = true;
     var response = await http.get(
