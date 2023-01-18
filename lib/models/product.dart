@@ -13,6 +13,7 @@ class Product {
     this.image,
     this.description,
     this.price,
+    this.quantity,
     this.approved,
     this.category,
   });
@@ -21,6 +22,7 @@ class Product {
   String? image;
   String? description;
   String? price;
+  int? quantity;
   String? approved;
   String? category;
 
