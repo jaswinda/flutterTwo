@@ -16,15 +16,15 @@ class AuthenticationController extends GetxController {
     var response = await http.post(Uri.parse(LOGINAPI), body: data);
     loading.value = false;
     var decodedResponse = await jsonDecode(response.body);
-   
+
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
       var token = decodedResponse["token"];
-      var role =  decodedResponse["role"];
+      var role = decodedResponse["role"];
       print(decodedResponse);
       await authService.savetoken(token, role: role);
 
-      Get.to(()=> const AuthChecker());
+      Get.to(() => const AuthChecker());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }
@@ -39,12 +39,9 @@ class AuthenticationController extends GetxController {
     var decodedResponse = await jsonDecode(response.body);
     if (decodedResponse["success"]) {
       Get.snackbar("Success", decodedResponse["message"]);
-      print(decodedResponse);
-      Get.to( ()=>const AuthChecker());
+      Get.to(() => const AuthChecker());
     } else {
       Get.snackbar("Failed", decodedResponse["message"]);
     }
   }
-
-  
 }

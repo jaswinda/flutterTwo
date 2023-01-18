@@ -41,6 +41,7 @@ dependencies:
   tabnavigator: ^1.0.0
   image_picker: ^0.8.6
   toggle_switch: ^2.0.1
+  badges: ^2.0.3
 
 dev_dependencies:
   flutter_test:
