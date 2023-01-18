@@ -10,8 +10,8 @@ class AuthenticationController extends GetxController {
   final AuthService authService = AuthService();
 
   var loading = false.obs;
-  Future<void> login({required String email, required String password}) async {
-    var data = {'email': email, 'password': password};
+  Future<void> login({required String username, required String password}) async {
+    var data = {'username': username, 'password': password};
     loading.value = true;
     var response = await http.post(Uri.parse(LOGINAPI), body: data);
     loading.value = false;
@@ -31,8 +31,8 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> register(
-      {required String email, required String password}) async {
-    var data = {'email': email, 'password': password};
+      {required String username, required String password}) async {
+    var data = {'username': username, 'password': password};
     loading.value = true;
     var response = await http.post(Uri.parse(SIGNUPAPI), body: data);
     loading.value = false;

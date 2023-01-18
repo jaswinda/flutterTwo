@@ -17,8 +17,8 @@ class MerchantController extends GetxController {
   }
 
   Future<void> register(
-      {required String email, required String password}) async {
-    var data = {'email': email, 'password': password};
+      {required String username, required String password}) async {
+    var data = {'username': username, 'password': password};
     loading.value = true;
     var response = await http.post(Uri.parse(MERCAHNTADDAPI), body: data);
     loading.value = false;

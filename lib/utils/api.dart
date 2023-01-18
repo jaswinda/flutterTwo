@@ -1,4 +1,4 @@
-const baseUrl = "http://192.168.1.90/sample/test/";
+const baseUrl = "http://192.168.1.73/test/";
 
 const SIGNUPAPI = '${baseUrl}signup.php';
 const LOGINAPI = '${baseUrl}login.php';

@@ -5,7 +5,7 @@ import 'package:week_one_project/controllers/authentication_controler.dart';
 import 'package:week_one_project/pages/register_page.dart';
 
 class LoginPage extends StatelessWidget {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final loginController = Get.put(AuthenticationController());
   LoginPage({Key? key}) : super(key: key);
@@ -23,10 +23,10 @@ class LoginPage extends StatelessWidget {
           )),
           const SizedBox(height: 20),
           TextFormField(
-            controller: emailController,
+            controller: usernameController,
             decoration: const InputDecoration(
-              hintText: "Enter your email",
-              labelText: "Email",
+              hintText: "Enter your username",
+              labelText: "Username",
               border: OutlineInputBorder(),
             ),
           ),
@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
             controller: passwordController,
             obscureText: true,
             decoration: const InputDecoration(
-              hintText: "Enter your Password",
+              hintText: "Enter your password",
               labelText: "Password",
               border: OutlineInputBorder(),
             ),
@@ -49,7 +49,7 @@ class LoginPage extends StatelessWidget {
                         width: Get.width,
                         onPressed: () {
                           loginController.login(
-                              email: emailController.text,
+                              username: usernameController.text,
                               password: passwordController.text);
                         },
                       ),
