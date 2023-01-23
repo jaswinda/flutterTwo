@@ -46,7 +46,7 @@ class AddMerchant extends StatelessWidget {
                       : AppButton(
                           onPressed: () {
                             merchantController.register(
-                                email: usernameController.text,
+                                username: usernameController.text,
                                 password: passwordController.text);
                           },
                           width: Get.width,
