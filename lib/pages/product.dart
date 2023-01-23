@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/cart_controller.dart';
 import 'package:week_one_project/models/product.dart';
+import 'package:week_one_project/pages/increment_decrement.dart';
 import 'package:week_one_project/utils/api.dart';
 
 class AdminProductPage extends StatelessWidget {
@@ -31,8 +32,9 @@ class AdminProductPage extends StatelessWidget {
             child: AppButton(
               width: Get.width,
               onPressed: () {
-                product.quantity = 5;
-                cc.add(product);
+                Get.bottomSheet(IncrementDecrement(
+                  p: product,
+                ));
               },
               label: "Add To Cart",
             ),

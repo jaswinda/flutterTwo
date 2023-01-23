@@ -8,11 +8,10 @@ import '../pages/product.dart';
 import '../utils/api.dart';
 
 class ProductTile extends StatelessWidget {
-  final ProductController pc;
+  final ProductController? pc;
   final Product p;
   final bool isAdmin;
-  const ProductTile(
-      {super.key, required this.p, required this.pc, this.isAdmin = true});
+  const ProductTile({super.key, required this.p, this.pc, this.isAdmin = true});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +83,7 @@ class ProductTile extends StatelessWidget {
                                       'product_id': p.id,
                                       'approved': p.approved == '1' ? '0' : '1'
                                     };
-                                    pc.toggle(data: data);
+                                    pc!.toggle(data: data);
                                   },
                                 ),
                             ],

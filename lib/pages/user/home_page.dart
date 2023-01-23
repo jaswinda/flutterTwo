@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/product_tile.dart';
 import 'package:week_one_project/components/user_component.dart';
+import 'package:week_one_project/controllers/cart_controller.dart';
 import 'package:week_one_project/controllers/product_controller.dart';
 import 'package:week_one_project/models/product.dart';
 import 'package:week_one_project/pages/auth_checker.dart';
+import 'package:week_one_project/pages/cart_page.dart';
 import 'package:week_one_project/services/auth_service.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   ProductController pc = Get.put(ProductController());
+  CartController cartController = Get.put(CartController());
   AuthService authService = AuthService();
   HomePage({super.key});
 
@@ -18,19 +22,20 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 10,
-        title: const Text("My chats"),
+        title: const Text("Ecom"),
         actions: [
           IconButton(
               onPressed: () async {
-                await authService.removeToken();
-                Get.to(const AuthChecker());
+                Get.to(() => CartPage());
               },
-              icon: Badge(
-                  badgeContent: const Text(
-                    '3',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  child: const Icon(Icons.shopping_bag))),
+              icon: Obx(() => Container(
+                    child: Badge(
+                        badgeContent: Text(
+                          cartController.cart.length.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        child: const Icon(Icons.shopping_bag)),
+                  ))),
           IconButton(
               onPressed: () async {
                 await authService.removeToken();

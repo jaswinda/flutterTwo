@@ -22,7 +22,7 @@ class Product {
   String? image;
   String? description;
   String? price;
-  int? quantity;
+  String? quantity;
   String? approved;
   String? category;
 
@@ -31,6 +31,7 @@ class Product {
         image: json["image"],
         description: json["description"],
         price: json["price"],
+        quantity: json["quantity"],
         approved: json["approved"],
         category: json["category"],
       );
@@ -40,6 +41,7 @@ class Product {
         "image": image,
         "description": description,
         "price": price,
+        "quantity": quantity,
         "approved": approved,
         "category": category,
       };
