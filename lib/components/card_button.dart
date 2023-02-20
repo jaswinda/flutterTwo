@@ -15,7 +15,7 @@ class Cardbutton extends StatelessWidget {
             height: 100,
             width: 100,
             decoration: const BoxDecoration(
-              color: Colors.grey,
+              color: Color.fromARGB(255, 149, 185, 215),
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               boxShadow: [
                 BoxShadow()
@@ -23,7 +23,7 @@ class Cardbutton extends StatelessWidget {
             ),
             child:  Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Center(child: Text(lable, textAlign: TextAlign.center, style: const TextStyle(color: Colors.yellow),)),
+              child: Center(child: Text(lable, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white),)),
             ),
           ),
         ),

@@ -27,7 +27,15 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Container(
       height: Get.height / 2,
-      color: Colors.white,
+   
+      decoration: const BoxDecoration(
+           color: Colors.white,
+
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: Form(
         key: _formKey,
         child: Padding(
@@ -37,7 +45,7 @@ class _CategoryPageState extends State<CategoryPage> {
               children: [
                 const Text(
                   "Category",
-                  style: TextStyle(fontSize: 30),
+                  style: TextStyle(fontSize: 30, color: Colors.blue),
                 ),
                 const SizedBox(
                   height: 20,

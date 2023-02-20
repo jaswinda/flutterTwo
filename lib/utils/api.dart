@@ -1,4 +1,4 @@
-const baseUrl = "http://192.168.1.73/test/";
+const baseUrl = "http://192.168.1.69/cake_store/";
 
 const SIGNUPAPI = '${baseUrl}signup.php';
 const LOGINAPI = '${baseUrl}login.php';

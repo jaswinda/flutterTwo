@@ -8,7 +8,7 @@ class AppButton extends StatelessWidget {
   final double width;
   const AppButton(
       {super.key,
-      this.buttonColor = Colors.red,
+      this.buttonColor = Colors.blue,
       this.onPressed,
       this.height = 50,
       this.width = 100,
@@ -23,7 +23,7 @@ class AppButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
             color: buttonColor,
-            borderRadius: const BorderRadius.all(Radius.circular(100))),
+            borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Center(
             child: Hero(
               tag: 'auth',

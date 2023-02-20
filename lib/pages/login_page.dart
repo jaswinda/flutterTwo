@@ -16,10 +16,13 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Image.asset("assets/images/logo.png", width: 100, height: 100)
+          ,
+          const SizedBox(height: 20),
           const Center(
               child: Text(
             "Login",
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24, color: Colors.blue),
           )),
           const SizedBox(height: 20),
           TextFormField(

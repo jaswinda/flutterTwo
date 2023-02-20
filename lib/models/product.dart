@@ -5,12 +5,15 @@ List<Product?>? productFromJson(String str) => json.decode(str) == null
     : List<Product?>.from(json.decode(str)!.map((x) => Product.fromJson(x)));
 
 String productToJson(List<Product?>? data) => json.encode(
-    data == null ? [] : List<dynamic>.from(data!.map((x) => x!.toJson())));
+    data == null ? [] : List<dynamic>.from(data.map((x) => x!.toJson())));
 
 class Product {
+
+
   Product({
     this.id,
     this.image,
+    this.name,
     this.description,
     this.price,
     this.quantity,
@@ -20,6 +23,7 @@ class Product {
 
   String? id;
   String? image;
+  String? name;
   String? description;
   String? price;
   String? quantity;
@@ -29,6 +33,7 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         image: json["image"],
+        name: json["name"],
         description: json["description"],
         price: json["price"],
         quantity: json["quantity"],

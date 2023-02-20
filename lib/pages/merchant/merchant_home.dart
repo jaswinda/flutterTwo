@@ -49,7 +49,7 @@ class _MerchantHomeState extends State<MerchantHome> {
       initialData: _initTab,
       builder: (context, snapshot) {
         return BottomNavigationBar(
-          selectedItemColor: Colors.orange,
+          selectedItemColor: Colors.blue,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.feedback),

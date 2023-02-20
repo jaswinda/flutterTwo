@@ -14,32 +14,48 @@ class AdminProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Hero(
-            tag: 'image_' + product.image!,
-            child: Image.network(
-              baseUrl + product.image!,
-              height: 300,
-              fit: BoxFit.cover,
+      appBar: AppBar(
+        title: Text(product.name!),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Hero(
+              tag: 'image_${product.image!}',
+              child: Image.network(
+                baseUrl + product.image!,
+                height: 300,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Text(product.description!),
-          Text("Price: " + product.price!),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AppButton(
-              width: Get.width,
-              onPressed: () {
-                Get.bottomSheet(IncrementDecrement(
-                  p: product,
-                ));
-              },
-              label: "Add To Cart",
+                 const SizedBox(height: 20,),
+            Text("Price: ${product.price!}", 
+            style: const TextStyle(
+              color: Colors.red,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
             ),
-          ),
-        ],
+            
+            ),
+       
+            const SizedBox(height: 20,),
+            Text(product.description!),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppButton(
+                width: Get.width,
+                onPressed: () {
+                  Get.bottomSheet(IncrementDecrement(
+                    p: product,
+                  ));
+                },
+                label: "Add To Cart",
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
