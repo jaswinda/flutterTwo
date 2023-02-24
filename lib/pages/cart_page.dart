@@ -20,7 +20,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart Page"),
+        title: const Text("Cart Page"),
       ),
       body: Column(
         children: [
@@ -36,10 +36,11 @@ class CartPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Obx(() => AppButton(
                   onPressed: () {
-                    Get.to(() => KhaltiExampleApp());
+                    // Get.to(() => KhaltiExampleApp());
+                    cartController.onPaymentComplete(token: "token");
                   },
                   width: Get.width,
-                  label: "Pay " + cartController.totalCosting.toString(),
+                  label: "Pay ${cartController.totalCosting}",
                 )),
           )
         ],
@@ -61,14 +62,14 @@ class CartPage extends StatelessWidget {
               color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(20.0)),
               border: Border.all(color: Colors.black, width: 0.5),
-              boxShadow: [BoxShadow()],
+              boxShadow: const [BoxShadow()],
             ),
             child: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Hero(
-                    tag: 'image_' + p.image!,
+                    tag: 'image_${p.image!}',
                     child: Container(
                       width: 120,
                       decoration: BoxDecoration(
@@ -80,22 +81,22 @@ class CartPage extends StatelessWidget {
                               image: NetworkImage(
                                 baseUrl + p.image!,
                               )),
-                          boxShadow: [BoxShadow()]),
+                          boxShadow: const [BoxShadow()]),
                     ),
                   ),
                 ),
                 Expanded(
                     child:
-                        Text(p.description!, style: TextStyle(fontSize: 15))),
+                        Text(p.description!, style: const TextStyle(fontSize: 15))),
                 Expanded(
                     child: Text(p.quantity.toString(),
-                        style: TextStyle(fontSize: 20))),
+                        style: const TextStyle(fontSize: 20))),
                 Expanded(
                   child: Text(
                     (int.parse(p.quantity.toString()) *
                             double.parse(p.price.toString()))
                         .toString(),
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 )
               ],

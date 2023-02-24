@@ -1,10 +1,13 @@
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:week_one_project/models/product.dart';
+import 'package:week_one_project/services/auth_service.dart';
+import 'package:week_one_project/utils/api.dart';
 import 'package:week_one_project/utils/messages.dart';
 
 class CartController extends GetxController {
+   AuthService authService = AuthService();
   var quantity = 1.obs;
   var cart = {}.obs;
   var totalCosting = 0.0.obs;
@@ -42,5 +45,22 @@ class CartController extends GetxController {
     if (quantity.value != 1) {
       quantity.value--;
     }
+  }
+
+  onPaymentComplete(  {required String token}) async {
+     var token = await authService.getToken();
+     var data = {'token': token, 'total': totalCosting.value.toString()};
+
+     print(data);
+     var response = await http.post(Uri.parse(PLACE_ORDER), body: data);
+      var decodedResponse = await jsonDecode(response.body);
+      if (decodedResponse["success"]) {
+        cart.clear();
+        totalCosting.value = 0.0;
+        successMessage("Order Placed Successfully");
+      } else {
+        print(decodedResponse);
+        errorMessage("Failed to place order");
+      }
   }
 }

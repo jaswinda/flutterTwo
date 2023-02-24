@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khalti/khalti.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+import 'package:week_one_project/controllers/cart_controller.dart';
 
 class KhaltiExampleApp extends StatelessWidget {
   const KhaltiExampleApp({Key? key}) : super(key: key);
@@ -40,6 +42,7 @@ class WalletPayment extends StatefulWidget {
 }
 
 class _WalletPaymentState extends State<WalletPayment> {
+   CartController cartController = Get.put(CartController());
   late final TextEditingController _mobileController, _pinController;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -134,6 +137,14 @@ class _WalletPaymentState extends State<WalletPayment> {
                   // do the things after payment is succesful
 
                   debugPrint(model.toString());
+
+                 cartController.onPaymentComplete(token: model.token);
+                  
+              
+                  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                    const SnackBar(content: Text('Payment Successful')),
+                  );
+
                 } catch (e) {
                   ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                     SnackBar(content: Text(e.toString())),

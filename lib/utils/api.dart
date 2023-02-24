@@ -8,3 +8,4 @@ const PRODUCTGETAPI = '${baseUrl}getProducts.php';
 const ADD_CATEGORY = '${baseUrl}addCategory.php';
 const ADD_PRODUCT = '${baseUrl}addProduct.php';
 const TOGGLE_PRODUCT = '${baseUrl}productToggle.php';
+const PLACE_ORDER = '${baseUrl}placeOrder.php';

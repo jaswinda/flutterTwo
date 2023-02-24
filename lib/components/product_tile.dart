@@ -11,7 +11,8 @@ class ProductTile extends StatelessWidget {
   final ProductController? pc;
   final Product p;
   final bool isAdmin;
-  const ProductTile({super.key, required this.p, this.pc, this.isAdmin = true});
+  final bool isMerchant;
+   const ProductTile({super.key, required this.p, this.pc, this.isAdmin = true, this.isMerchant = false });
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,14 @@ class ProductTile extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                     border: Border.all(color: Colors.black, width: 0.5),
-                    boxShadow: [BoxShadow()],
+                    boxShadow: const [BoxShadow()],
                   ),
                   child: Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Hero(
-                          tag: 'image_' + p.image!,
+                          tag: 'image_${p.image!}',
                           child: Container(
                             height: 100,
                             decoration: BoxDecoration(
@@ -52,7 +53,7 @@ class ProductTile extends StatelessWidget {
                                     image: NetworkImage(
                                       baseUrl + p.image!,
                                     )),
-                                boxShadow: [BoxShadow()]),
+                                boxShadow: const [BoxShadow()]),
                           ),
                         ),
                       ),
@@ -62,8 +63,8 @@ class ProductTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(p.description!),
-                              Text("Price: " + p.price.toString()),
-                              if (isAdmin)
+                              Text("Price: ${p.price}"),
+                              if (isAdmin && !isMerchant)
                                 ToggleSwitch(
                                   minWidth: 80.0,
                                   cornerRadius: 20.0,
@@ -76,7 +77,7 @@ class ProductTile extends StatelessWidget {
                                   inactiveFgColor: Colors.white,
                                   initialLabelIndex: p.approved == "1" ? 0 : 1,
                                   totalSwitches: 2,
-                                  labels: ['Approve', 'Reject'],
+                                  labels: const ['Approve', 'Reject'],
                                   radiusStyle: true,
                                   onToggle: (index) {
                                     var data = {
@@ -96,6 +97,6 @@ class ProductTile extends StatelessWidget {
               ),
             ),
           )
-        : SizedBox();
+        : const SizedBox();
   }
 }
