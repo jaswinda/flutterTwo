@@ -59,7 +59,7 @@ class CartController extends GetxController {
         totalCosting.value = 0.0;
         successMessage("Order Placed Successfully");
       } else {
-        print(decodedResponse);
+  
         errorMessage("Failed to place order");
       }
   }
