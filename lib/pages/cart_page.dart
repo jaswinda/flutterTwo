@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
 import 'package:week_one_project/controllers/cart_controller.dart';
 import 'package:week_one_project/models/product.dart';
+import 'package:week_one_project/pages/user/my_orders.dart';
 
 import '../utils/api.dart';
 
@@ -17,7 +18,21 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cart Page"),
+        actions:  [
+          InkWell(
+            onTap: ()=>Get.to(() =>  MyOrders()),
+            child: Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("My Orders"),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
+
       body: Column(
         children: [
           Expanded(
