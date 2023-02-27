@@ -8,6 +8,7 @@ import 'package:week_one_project/utils/messages.dart';
 
 class CartController extends GetxController {
    AuthService authService = AuthService();
+  var isLoading = false.obs;
   var quantity = 1.obs;
   var cart = {}.obs;
   var totalCosting = 0.0.obs;
@@ -47,20 +48,26 @@ class CartController extends GetxController {
     }
   }
 
-  onPaymentComplete(  {required String token}) async {
-     var token = await authService.getToken();
-     var data = {'token': token, 'total': totalCosting.value.toString()};
-
-     print(data);
-     var response = await http.post(Uri.parse(PLACE_ORDER), body: data);
-      var decodedResponse = await jsonDecode(response.body);
-      if (decodedResponse["success"]) {
-        cart.clear();
-        totalCosting.value = 0.0;
-        successMessage("Order Placed Successfully");
-      } else {
-  
-        errorMessage("Failed to place order");
-      }
+ Future<void> placeOrder({required String token}) async {
+      var token = await authService.getToken();
+      var orderItems =  cart.values.map((e) => 
+      jsonEncode({
+        "product_id": jsonDecode(e)["id"],
+        "quantity": jsonDecode(e)["quantity"]
+      })
+      ).toList();
+    var data = {"token": token.toString(),
+      "order_items": jsonEncode(orderItems),
+      "total": totalCosting.value.toString()
+     };
+    isLoading.value = true;
+    var response = await http.post(Uri.parse(PLACE_ORDER), body: data);
+    isLoading.value = false;
+    var decodedResponse = await jsonDecode(response.body);
+    if (decodedResponse["success"]) {
+      Get.snackbar("Success", decodedResponse["message"]);
+    } else {
+      Get.snackbar("Failed", decodedResponse["message"]);
+    }
   }
 }

@@ -1,14 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:week_one_project/components/app_button.dart';
-import 'package:week_one_project/components/product_tile.dart';
 import 'package:week_one_project/controllers/cart_controller.dart';
 import 'package:week_one_project/models/product.dart';
-import 'package:week_one_project/payment/khalti.dart';
 
 import '../utils/api.dart';
 
@@ -37,7 +33,7 @@ class CartPage extends StatelessWidget {
             child: Obx(() => AppButton(
                   onPressed: () {
                     // Get.to(() => KhaltiExampleApp());
-                    cartController.onPaymentComplete(token: "token");
+                    cartController.placeOrder(token: "token");
                   },
                   width: Get.width,
                   label: "Pay ${cartController.totalCosting}",

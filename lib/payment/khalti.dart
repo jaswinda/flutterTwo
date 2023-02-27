@@ -138,7 +138,7 @@ class _WalletPaymentState extends State<WalletPayment> {
 
                   debugPrint(model.toString());
 
-                 cartController.onPaymentComplete(token: model.token);
+                 cartController.placeOrder(token: model.token);
                   
               
                   ScaffoldMessenger.maybeOf(context)?.showSnackBar(
