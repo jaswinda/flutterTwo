@@ -28,14 +28,7 @@ class HomePage extends StatelessWidget {
               onPressed: () async {
                 Get.to(() => CartPage());
               },
-              icon: Obx(() => Container(
-                    child: Badge(
-                        badgeContent: Text(
-                          cartController.cart.length.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        child: const Icon(Icons.shopping_bag)),
-                  ))),
+              icon:const Icon(Icons.shopping_bag)),
           IconButton(
               onPressed: () async {
                 await authService.removeToken();
